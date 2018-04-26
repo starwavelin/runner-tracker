@@ -12,7 +12,7 @@ public interface LocationService {
 
     void deleteAll();
 
-    Page<Location> findByRunnerMovementType(String movementType, Pageable pageable);
+    /*Page<Location> findByRunnerMovementType(String movementType, Pageable pageable);
 
-    Page<Location> findByRunnerRunningId(String runningId, Pageable pageable);
+    Page<Location> findByRunnerRunningId(String runningId, Pageable pageable);*/
 }

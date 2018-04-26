@@ -30,15 +30,15 @@ public class LocationServiceImpl implements LocationService {
         this.locationRepository.deleteAll();
     }
 
-    @Override
-    public Page<Location> findByRunnerMovementType(String movementType, Pageable pageable) {
-        return locationRepository.findByRunnerMovementType(
-                Location.RunnerMovementType.valueOf(movementType), pageable
-        );
-    }
-
-    @Override
-    public Page<Location> findByRunnerRunningId(String runningId, Pageable pageable) {
-        return locationRepository.findByUnitInfoRunningId(runningId, pageable);
-    }
+//    @Override
+//    public Page<Location> findByRunnerMovementType(String movementType, Pageable pageable) {
+//        return locationRepository.findByRunnerMovementType(
+//                Location.RunnerMovementType.valueOf(movementType), pageable
+//        );
+//    }
+//
+//    @Override
+//    public Page<Location> findByRunnerRunningId(String runningId, Pageable pageable) {
+//        return locationRepository.findByUnitInfoRunningId(runningId, pageable);
+//    }
 }
