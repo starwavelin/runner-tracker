@@ -19,7 +19,7 @@ the place to apply **Message Queues**, etc.
 
 ### Design Diagram
 ##### Architectural Overview
-
+![alt text](./diagrams/architectural_overview.jpg "Architectural Overview")
 
 ### Learning Outcomes
 
