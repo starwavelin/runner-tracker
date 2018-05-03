@@ -23,9 +23,17 @@ the place to apply **Message Queues**, etc.
 
 ### Learning Outcomes
 
-1. [] Mastered the core knowledge for backend development using **Java 8**,
+1. [x] Mastered the core knowledge for backend development using **Java 8**,
 and understood the code structure and the best practice
-2. [] Understood the theory behind microservices and its design principles,
+2. [x] Understood the theory behind microservices and its design principles,
 became skilled in using **Spring Boot**, **Spring Data**, **JPA**,
 **In-memory Database (ie. H2)**, and **MongoDB**, and knew how to handle the
-configuration and deployment for such a project with these technologies combined
+configuration and deployment for such a project with these technologies
+combined
+3. [] Understood the challenges from a **cloud native application** and how to
+design microservices in a distributive system; gained knowledge in using
+**Spring Cloud** and **Netflix Open Source** to do cloud native application
+development
+4. [] Understood and mastered service monitoring and health checking
+5. [] Practiced software testing theories and methods; being able to write
+high-quality code, unit testing and integration testing
