@@ -1,3 +1,6 @@
 # for supply location service
 server:
   port: 9002
+spring:
+  application:
+    name: supply-location-service
