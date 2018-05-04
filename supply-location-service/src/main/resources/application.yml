@@ -1,0 +1,3 @@
+# for supply location service
+server:
+  port: 9002
