@@ -1,16 +1,25 @@
 package demo.domain;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Document
+@RequiredArgsConstructor(onConstructor = @__(@PersistenceConstructor))
 public class SupplyLocation {
 
+    @Id
     private String id;
     private String address1;
     private String address2;
     private String city;
 
+    @GeoSpatialIndexed
     private final Point location;
     private String state;
     private String zip;
