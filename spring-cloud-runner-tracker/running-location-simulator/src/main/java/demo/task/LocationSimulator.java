@@ -50,7 +50,10 @@ public class LocationSimulator implements  Runnable {
                 return;
             }
             // while loop simulating running without cancel process
+            while (!Thread.interrupted()) {
 
+                sleep(startTime);
+            }
         } catch(InterruptedException ie) {
             destroy();
             return;
@@ -63,4 +66,19 @@ public class LocationSimulator implements  Runnable {
      * handle the case of canceling running
      */
     private void destroy() { this.currentPosition = null; }
+
+    /**
+     * Detailed implementation of sleep(startTime) used in
+     * the while (!Thread.interrupted) {} of run()
+     * @param startTime
+     * @throws InterruptedException
+     */
+    private void sleep(long startTime) throws InterruptedException {
+        long endTime = new Date().getTime();
+        long elapsedTime = endTime - startTime;
+
+        // The actual time period of sleeping
+        long sleepTime = (reportInterval - elapsedTime > 0) ? reportInterval - elapsedTime : 0;
+        Thread.sleep(sleepTime);
+    }
 }
