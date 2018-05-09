@@ -43,6 +43,24 @@ public class LocationSimulator implements  Runnable {
 
     @Override
     public void run() {
+        try {
+            executionStartTime = new Date();
+            if (cancel.get()) {
+                destroy();
+                return;
+            }
+            // while loop simulating running without cancel process
 
+        } catch(InterruptedException ie) {
+            destroy();
+            return;
+        }
+        destroy();
     }
+
+    /**
+     * help method for run()
+     * handle the case of canceling running
+     */
+    private void destroy() { this.currentPosition = null; }
 }
