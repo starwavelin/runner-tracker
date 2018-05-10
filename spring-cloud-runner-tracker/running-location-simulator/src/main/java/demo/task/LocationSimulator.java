@@ -51,9 +51,51 @@ public class LocationSimulator implements  Runnable {
             }
             // while loop simulating running without cancel process
             while (!Thread.interrupted()) {
+                long startTime = new Date().getTime();
 
+                if (this.currentPosition != null) {
+                    if (shouldMove) {
+                        moveRunningLocation(); // help method
+                        currentPosition.setSpeed(speedInMps);
+                    } else {  // meaning arriving destination
+                        currentPosition.setSpeed(0.0);
+                    }
+
+                    // set runner status
+                    currentPosition.setRunnerStatus(runnerStatus);
+
+                    // set medical info based on runner status
+                    final MedicalInfo medicalInfoToUse;
+                    switch (runnerStatus) {
+                        case SUPPLY_NOW:
+                        case SUPPLY_SOON:
+                        case STOP_NOW:
+                            medicalInfoToUse = medicalInfo;
+                            break;
+                        default:
+                            medicalInfoToUse = null;
+                            break;
+                    }
+
+                    // construct currentPosition of type CurrentPosition that will be sent to Distributor
+                    final CurrentPosition currentPosition = new CurrentPosition(
+                        this.currentPosition.getRunningId(),
+                        new Point(this.currentPosition.getPosition().getLatitude(),
+                                this.currentPosition.getPosition().getLongitude()),
+                        this.currentPosition.getRunnerStatus(),
+                        this.currentPosition.getSpeed(),
+                        this.currentPosition.getLeg().getHeading(),
+                        medicalInfoToUse
+                    );
+
+                    // Send the currentPosition prepared to location distributor via REST API
+                    // @TODO Class 12-1
+
+                } // end of if (this.currentPosition != null)
+
+                // wait until next position report
                 sleep(startTime);
-            }
+            } // end of while (!Thread.interrupted)
         } catch(InterruptedException ie) {
             destroy();
             return;
