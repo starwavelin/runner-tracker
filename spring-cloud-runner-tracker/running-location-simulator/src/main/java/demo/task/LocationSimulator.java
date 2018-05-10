@@ -123,4 +123,45 @@ public class LocationSimulator implements  Runnable {
         long sleepTime = (reportInterval - elapsedTime > 0) ? reportInterval - elapsedTime : 0;
         Thread.sleep(sleepTime);
     }
+
+
+    // set new position of running location based on current position and running speed
+    private void moveRunningLocation() {
+        double distance = speedInMps * reportInterval / 1000.0; // convert to second
+        double distanceFromStart = currentPosition.getDistanceFromStart() + distance;
+        double excess = 0.0;
+
+        for (int i = currentPosition.getLeg().getId(); i < legs.size(); i++) {
+            Leg curLeg = legs.get(i);
+            excess = (distanceFromStart > curLeg.getLength()) ? distanceFromStart - curLeg.getLength() : 0.0;
+
+            // when the next position is within the current leg
+            if (Double.doubleToRawLongBits(excess) == 0) {
+                currentPosition.setDistanceFromStart(distanceFromStart);
+                currentPosition.setLeg(curLeg);
+                // @TODO Impl the new position calculation method in NavUtils class
+
+                // for now
+                Point newPosition = null;
+                currentPosition.setPosition(newPosition);
+                return;
+            }
+
+            // when the next position is beyond the current leg, update distanceFromStart and continue in loop
+            distanceFromStart = excess;
+        }
+
+        // After the new position has been moved, we still need to simulate, we start from the beginning
+        setStartPosition();
+    }
+
+    private void setStartPosition() {
+        currentPosition = new PositionInfo();
+        currentPosition.setRunningId(runningId);
+
+        Leg leg = legs.get(0);
+        currentPosition.setLeg(leg);
+        currentPosition.setPosition(leg.getStartPosition());
+        currentPosition.setDistanceFromStart(0.0);
+    }
 }
